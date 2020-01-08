@@ -266,7 +266,7 @@ actors:
 
 cache:
   # caffeine or redis
-  type: "${CACHE_TYPE:caffeine}"
+  type: "${CACHE_TYPE:redis}"
 
 caffeine:
   specs:
@@ -300,7 +300,7 @@ redis:
   connection:
     type: standalone
   standalone:
-    host: "${REDIS_HOST:localhost}"
+    host: "${REDIS_HOST:123.56.220.167}"
     port: "${REDIS_PORT:6379}"
     useDefaultClientConfig: "${REDIS_USE_DEFAULT_CLIENT_CONFIG:true}"
     # this value may be used only if you used not default ClientConfig
@@ -320,7 +320,7 @@ redis:
   # db index
   db: "${REDIS_DB:0}"
   # db password
-  password: "${REDIS_PASSWORD:}"
+  password: "${REDIS_PASSWORD:redis--MMMNNN-abc-%%^}"
   # pool config
   pool_config:
     maxTotal: "${REDIS_POOL_CONFIG_MAX_TOTAL:128}"
@@ -378,9 +378,9 @@ spring:
     database-platform: "${SPRING_JPA_DATABASE_PLATFORM:org.hibernate.dialect.PostgreSQLDialect}"
   datasource:
     driverClassName: "${SPRING_DRIVER_CLASS_NAME:org.postgresql.Driver}"
-    url: "${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/thingsboard}"
+    url: "${SPRING_DATASOURCE_URL:jdbc:postgresql://49.233.184.28:5432/thingsboardDB}"
     username: "${SPRING_DATASOURCE_USERNAME:postgres}"
-    password: "${SPRING_DATASOURCE_PASSWORD:postgres}"
+    password: "${SPRING_DATASOURCE_PASSWORD:psiot2015}"
     hikari:
       maximumPoolSize: "${SPRING_DATASOURCE_MAXIMUM_POOL_SIZE:50}"
 
