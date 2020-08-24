@@ -23,7 +23,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
-import org.thingsboard.server.common.data.UUIDConverter;
 import org.thingsboard.server.dao.model.sql.EventEntity;
 
 import javax.persistence.EntityManager;
@@ -69,13 +68,15 @@ public abstract class AbstractEventInsertRepository implements EventInsertReposi
 
     protected Query getQuery(EventEntity entity, String query) {
         return entityManager.createNativeQuery(query, EventEntity.class)
-                .setParameter("id", UUIDConverter.fromTimeUUID(entity.getId()))
+                .setParameter("id", entity.getUuid())
+                .setParameter("created_time", entity.getCreatedTime())
                 .setParameter("body", entity.getBody().toString())
                 .setParameter("entity_id", entity.getEntityId())
                 .setParameter("entity_type", entity.getEntityType().name())
                 .setParameter("event_type", entity.getEventType())
                 .setParameter("event_uid", entity.getEventUid())
-                .setParameter("tenant_id", entity.getTenantId());
+                .setParameter("tenant_id", entity.getTenantId())
+                .setParameter("ts", entity.getTs());
     }
 
     private EventEntity processSaveOrUpdate(EventEntity entity, String query) {

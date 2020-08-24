@@ -24,15 +24,35 @@ import java.util.Arrays;
 
 @RunWith(ClasspathSuite.class)
 @ClassnameFilters({
-        "org.thingsboard.server.dao.service.*ServiceSqlTest"
+        "org.thingsboard.server.dao.service.sql.*SqlTest"
 })
 public class SqlDaoServiceTestSuite {
 
     @ClassRule
     public static CustomSqlUnit sqlUnit = new CustomSqlUnit(
-            Arrays.asList("sql/schema-ts.sql", "sql/schema-entities.sql", "sql/schema-entities-idx.sql", "sql/system-data.sql", "sql/system-test.sql"),
-            "sql/drop-all-tables.sql",
+            Arrays.asList("sql/schema-ts-hsql.sql", "sql/schema-entities-hsql.sql", "sql/schema-entities-idx.sql"
+                    , "sql/system-data.sql"
+                    , "sql/system-test.sql"
+            ),
+            "sql/hsql/drop-all-tables.sql",
             "sql-test.properties"
     );
+
+//    @ClassRule
+//    public static CustomSqlUnit sqlUnit = new CustomSqlUnit(
+//            Arrays.asList("sql/schema-ts-psql.sql"
+//                    , "sql/schema-entities.sql", "sql/schema-entities-idx.sql"
+//                    , "sql/system-data.sql", "sql/system-test.sql"
+//            ),
+//            "sql/psql/drop-all-tables.sql",
+//            "sql-test.properties"
+//    );
+
+//    @ClassRule
+//    public static CustomSqlUnit sqlUnit = new CustomSqlUnit(
+//            Arrays.asList("sql/schema-timescale.sql", "sql/schema-entities.sql", "sql/schema-entities-idx.sql", "sql/system-data.sql", "sql/system-test.sql"),
+//            "sql/timescale/drop-all-tables.sql",
+//            "sql-test.properties"
+//    );
 
 }
